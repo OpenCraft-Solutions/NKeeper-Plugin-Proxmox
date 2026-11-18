@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "NKeeper.Abstractions": {
+        "type": "Direct",
+        "requested": "[1.12.0, )",
+        "resolved": "1.12.0",
+        "contentHash": "A2r3ih3IdZg8P7ndPL0JAqewdhngSMZDVa6iWkDyPbrQhU3uhHdMM105+1hHcGMGuwZu4B0Tu2abTpthDIZmww=="
+      },
+      "NKeeper.Plugin.Build": {
+        "type": "Direct",
+        "requested": "[1.12.0, )",
+        "resolved": "1.12.0",
+        "contentHash": "6t62iatcj8XhVpuDiu4PR9ZBbVwlzE4cWQfIhZ7d4A4bInpQ4BK11yIWbxnXT7vYfcVZzghyF/WkwHEnS3optQ==",
+        "dependencies": {
+          "NKeeper.Abstractions": "1.12.0"
+        }
+      },
+      "NKeeper.Plugins.Virtualization": {
+        "type": "Direct",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "v/QHqBQbVyK7viB9eyPuh8PiX8jGDRvCyen37Bx3c1t6BgbTyURhgw/aHq8qarj85f5RldX1bRDXkfCrawu/vA==",
+        "dependencies": {
+          "NKeeper.Abstractions": "1.8.0"
+        }
+      }
+    }
+  }
+}

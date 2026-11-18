@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="backend/NKeeper.Plugins.Proxmox.csproj" />
+  <Project Path="tests/NKeeper.Plugins.Proxmox.Tests.csproj" />
+</Solution>

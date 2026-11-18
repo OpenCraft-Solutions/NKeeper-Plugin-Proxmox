@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The proxmox plugin (docs/architecture.md §7.38). Built, packed and signed by NKeeper.Plugin.Build, which also builds
+    ../frontend with npm. It brings the plugin's .nkp to ../artifacts/plugins.
+  -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <!-- The SDK and virt-core's assembly are shared, from the server and from virt-core, so they aren't copied (plugin-security.md §7.1). -->
+    <PackageReference Include="NKeeper.Abstractions" ExcludeAssets="runtime" />
+    <PackageReference Include="NKeeper.Plugins.Virtualization" ExcludeAssets="runtime" />
+    <PackageReference Include="NKeeper.Plugin.Build" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="NKeeper.Plugins.Proxmox.Tests" />
+  </ItemGroup>
+
+</Project>
