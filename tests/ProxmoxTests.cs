@@ -17,6 +17,30 @@ public sealed class ProxmoxTests
     private static CancellationToken Ct => TestContext.Current.CancellationToken;
 
     [Fact]
+    public void A_scan_lists_the_clusters_vms_and_containers_with_their_node_resources_macs_and_static_addresses()
+    {
+        const string output = "proxmox\tpve1\n"
+            + """[{"type":"qemu","vmid":101,"name":"web01","node":"pve1","status":"running","maxcpu":4,"maxmem":8589934592},{"type":"qemu","vmid":102,"name":"db01","node":"pve2","status":"stopped","maxcpu":2,"maxmem":4294967296},{"type":"qemu","vmid":900,"name":"tmpl","node":"pve1","status":"stopped","template":1},{"type":"lxc","vmid":200,"name":"ct","node":"pve1","status":"running","maxcpu":1,"maxmem":536870912}]"""
+            + "\n/etc/pve/nodes/pve1/qemu-server/101.conf:net0: virtio=BC:24:11:AA:BB:01,bridge=vmbr0\n"
+            + "/etc/pve/nodes/pve1/qemu-server/101.conf:net0: virtio=bc:24:11:aa:bb:01,bridge=vmbr0\n"
+            + "/etc/pve/nodes/pve2/qemu-server/102.conf:net1: e1000=BC:24:11:AA:BB:02,bridge=vmbr1,firewall=1\n"
+            + "/etc/pve/nodes/pve1/lxc/200.conf:net0: name=eth0,bridge=vmbr0,hwaddr=BC:24:11:AA:BB:03,ip=192.0.2.50/24,type=veth\n";
+
+        var guests = ProxmoxScanner.Parse(output)!;
+
+        Assert.Equal(["ct", "db01", "web01"], guests.Select(g => g.Name));
+        var web = guests.Single(g => g.Name == "web01");
+        Assert.Equal((null, 4, 8192), (web.Node, web.CpuCores, web.MemoryMiB));
+        Assert.Equal(["BC:24:11:AA:BB:01"], web.MacAddresses);
+        // Another node's guest names its node; this node's, none.
+        Assert.Equal("pve2", guests.Single(g => g.Name == "db01").Node);
+        var ct = guests.Single(g => g.Name == "ct");
+        Assert.Equal(["192.0.2.50"], ct.IpAddresses);
+        Assert.Equal(["BC:24:11:AA:BB:03"], ct.MacAddresses);
+        Assert.Null(ProxmoxScanner.Parse("not proxmox"));
+    }
+
+    [Fact]
     public async Task The_clusters_vms_are_listed_by_name_without_templates_containers_or_bad_node_names()
     {
         var ssh = new FakeSsh { Output = Listing };
