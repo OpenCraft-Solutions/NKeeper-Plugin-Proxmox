@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup Label="NKeeper SDK (docs/architecture.md §9)">
-    <PackageVersion Include="NKeeper.Abstractions" Version="1.12.0" />
-    <PackageVersion Include="NKeeper.Plugin.Build" Version="1.12.0" />
+    <PackageVersion Include="NKeeper.Abstractions" Version="1.15.0" />
+    <PackageVersion Include="NKeeper.Plugin.Build" Version="1.15.0" />
     <!-- virt-core's assembly (§7.36), which this plugin depends on. -->
     <PackageVersion Include="NKeeper.Plugins.Virtualization" Version="1.0.0" />
   </ItemGroup>

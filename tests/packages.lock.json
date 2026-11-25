@@ -14,9 +14,9 @@
       },
       "NKeeper.Abstractions": {
         "type": "Direct",
-        "requested": "[1.12.0, )",
-        "resolved": "1.12.0",
-        "contentHash": "A2r3ih3IdZg8P7ndPL0JAqewdhngSMZDVa6iWkDyPbrQhU3uhHdMM105+1hHcGMGuwZu4B0Tu2abTpthDIZmww=="
+        "requested": "[1.15.0, )",
+        "resolved": "1.15.0",
+        "contentHash": "EEVSxKju99pw2rtp6iEM3T8n0KlD0VN+vaSGo/OgsdIopmjDsWMjJxAemJGdKUo3n6K8lZBVrZGfD2iEkzNGcQ=="
       },
       "NKeeper.Plugins.Virtualization": {
         "type": "Direct",
@@ -181,7 +181,7 @@
       "nkeeper.plugins.proxmox": {
         "type": "Project",
         "dependencies": {
-          "NKeeper.Abstractions": "[1.12.0, )",
+          "NKeeper.Abstractions": "[1.15.0, )",
           "NKeeper.Plugins.Virtualization": "[1.0.0, )"
         }
       }

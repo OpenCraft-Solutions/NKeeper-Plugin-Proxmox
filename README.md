@@ -9,9 +9,11 @@ It contributes the `proxmox` service type (a node's SSH, port 22) and a **Virtua
 - their power actions: start, shut down, reboot, pause, resume, hibernate, force off and reset, through `pvesh`, on whichever node the VM runs;
 - a VM's VNC console in the same tab, through `qm vncproxy`, as Proxmox's own web console reaches it. A VM on another node is reached over the cluster's own SSH between nodes.
 
-It reaches the node as 1.x did: over SSH, which core opens and signs in to with the service's credential, so the plugin never sees a password. `pvesh` and `qm` need root: sign in as root, or as a user who may use `sudo` without a password. It needs SDK 1.12 (`>=1.12.0 <2.0.0`), for a streaming command's input.
+It reaches the node as 1.x did: over SSH, which core opens and signs in to with the service's credential, so the plugin never sees a password. `pvesh` and `qm` need root: sign in as root, or as a user who may use `sudo` without a password. It needs SDK 1.15 (`>=1.15.0 <2.0.0`): a streaming command's input since 1.12, and scan findings with guests.
 
-**Not yet:** containers (LXC), SPICE consoles, and linking a guest to its host in NKeeper's inventory.
+**Scan** (host action `proxmox.scan`, SDK 1.15), 1.x's hypervisor scan: one SSH login lists every VM and container in the cluster (`pvesh get /cluster/resources`), with the node it runs on, its state, vCPUs and memory, its MAC addresses from its configuration, and a container's static addresses. The scan dialog proposes linking each to the host it is, as running on its node, or adding a host for it (NKeeper's `docs/architecture.md` §7.49). Nothing in the cluster changes; the scan is audited as `proxmox.scan`.
+
+**Not yet:** containers' (LXC) consoles and power, and SPICE consoles.
 
 The plugin's ID is `proxmox`, and it is on by default: it is signed with NKeeper's official key, and installed from NKeeper's plugin catalog.
 
